@@ -1,6 +1,7 @@
-using System.Text.RegularExpressions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
+
+using System.Text.RegularExpressions;
 
 namespace RobotCleaner;
 
@@ -51,10 +52,9 @@ public partial class RobotCleaner
             throw new ArgumentException("Move instructions cannot be invalid or empty");
 
         var startingPosition = StartingPositionRegex().Match(input).Groups[1].Value;
-        if (string.IsNullOrWhiteSpace(startingPosition))
-            throw new ArgumentException("Starting position cannot be invalid or empty");
-
-        return new RobotCleaner(map, moveInstructions, new Position(startingPosition), loggerInput);
+        return string.IsNullOrWhiteSpace(startingPosition)
+            ? throw new ArgumentException("Starting position cannot be invalid or empty")
+            : new RobotCleaner(map, moveInstructions, new Position(startingPosition), loggerInput);
     }
 
     public void LetsGo()
@@ -126,7 +126,7 @@ public partial class RobotCleaner
 
     private bool CanMove((int dx, int dy) change, out string error)
     {
-        //Map checks
+        //Map checks here
         if (change.dx is 1 or -1)
         {
             var newX = CurrentPosition.X + change.dx;
@@ -135,7 +135,7 @@ public partial class RobotCleaner
                 error = "About to go out of right-side of the map";
                 return false;
             }
-            if ( newX < _mapXMin)
+            if (newX < _mapXMin)
             {
                 error = "About to go out of left-side of the map";
                 return false;
@@ -156,37 +156,10 @@ public partial class RobotCleaner
                 return false;
             }
         }
-        
+
         //Obstacle checks here
 
         error = "";
         return true;
     }
-}
-
-public class ImpossibleMoveException : Exception
-{
-    public ImpossibleMoveException(string message) : base(message)
-    {
-    }
-}
-
-public record Position
-{
-    public Position(string input)
-    {
-        var match = Regex.Match(input, @"(-?\d+),(-?\d+)");
-        X = int.Parse(match.Groups[1].Value);
-        Y = int.Parse(match.Groups[2].Value);
-    }
-
-    public Position(Position position)
-    {
-        X = position.X;
-        Y = position.Y;
-    }
-
-    public int X { get; set; }
-    public int Y { get; set; }
-    public override string ToString() => $"{X},{Y}";
 }
