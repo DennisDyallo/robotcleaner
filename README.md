@@ -1,18 +1,14 @@
 # robotcleaner
-RobotCleaner
 
-
-Robot Cleaner
-
-Background
+# Background
 
 When you have a lot of people working in an office it can get dirty quite quickly if you’re not careful. However, cleaning staff are expensive. To save money on cleaning staff the best solution was deemed to be the creation of an automatic cleaning robot that cleans the office at night.
 
-Assignment
+# Assignment
 
 Your assignment is to build a prototype of this robot’s scheduling software. Since it’s only a prototype, the scope and required functionality is limited, and allows for some flexibility and interpretation in its implementation. However just because it’s simple doesn’t mean it’s not important, and it’s expected to be built to be both easy to maintain and easy to expand upon in the future.
 
-Requirements
+# Requirements
 
 The robot should use a Cartesian coordinate system to understand its position.
 
@@ -45,17 +41,8 @@ Bad input and errors should be handled with grace, and should provide helpful fe
 There is no need for an advanced UI; a simple command line is sufficient.
 
 
-Sawubona IT AB
 
-Box 190, Klarabergsviadukten 63, 101 23 Stockholm
-
-Org.nr 559120-0992
-
-www.sawubona.se
-
-
-
-Examples:
+# Examples:
 
 Here are some examples of input/output:
 
