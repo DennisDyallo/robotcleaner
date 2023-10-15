@@ -1,5 +1,7 @@
 name: Build and Test RobotCleaner
-
+permissions:
+    checks: write
+    pull-requests: write
 on:
   push:
     branches:
