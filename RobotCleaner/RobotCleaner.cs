@@ -6,7 +6,7 @@ namespace RobotCleaner;
 
 public partial class RobotCleaner
 {
-    private readonly ILogger<RobotCleaner>? _logger;
+    private readonly ILogger<RobotCleaner> _logger;
     private readonly List<Position> _visitedPositions = new();
     private readonly int _mapXMin;
     private readonly int _mapXMax;
@@ -38,7 +38,7 @@ public partial class RobotCleaner
 
     public static RobotCleaner Create(string input, ILogger<RobotCleaner>? logger = null)
     {
-        var _logger = logger ?? NullLogger<RobotCleaner>.Instance;
+        var loggerInput = logger ?? NullLogger<RobotCleaner>.Instance;
         if (input is null)
             throw new ArgumentNullException(nameof(input), "Input cannot be null");
 
@@ -54,7 +54,7 @@ public partial class RobotCleaner
         if (string.IsNullOrWhiteSpace(startingPosition))
             throw new ArgumentException("Starting position cannot be invalid or empty");
 
-        return new RobotCleaner(map, moveInstructions, new Position(startingPosition), logger);
+        return new RobotCleaner(map, moveInstructions, new Position(startingPosition), loggerInput);
     }
 
     public void LetsGo()
