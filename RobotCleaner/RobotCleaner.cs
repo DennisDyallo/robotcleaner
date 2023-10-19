@@ -9,20 +9,20 @@ public partial class RobotCleaner
 {
     private readonly ILogger<RobotCleaner> _logger;
     private readonly List<Position> _visitedPositions = new();
-    private readonly int _mapXMin;
-    private readonly int _mapXMax;
-    private readonly int _mapYMin;
-    private readonly int _mapYMax;
+    public readonly int XMin;
+    public readonly int XMax;
+    public readonly int YMin;
+    public readonly int YMax;
 
     private RobotCleaner(string map, string moveInstructions, Position startingPosition, ILogger<RobotCleaner> logger)
     {
         _logger = logger;
         Map = map;
         var mapSegments = Map.Split(',');
-        _mapXMin = int.Parse(mapSegments[0]);
-        _mapXMax = int.Parse(mapSegments[1]);
-        _mapYMin = int.Parse(mapSegments[2]);
-        _mapYMax = int.Parse(mapSegments[3]);
+        XMin = int.Parse(mapSegments[0]);
+        XMax = int.Parse(mapSegments[1]);
+        YMin = int.Parse(mapSegments[2]);
+        YMax = int.Parse(mapSegments[3]);
 
         MoveInstructions = moveInstructions;
         StartingPosition = startingPosition;
@@ -130,12 +130,12 @@ public partial class RobotCleaner
         if (change.dx is 1 or -1)
         {
             var newX = CurrentPosition.X + change.dx;
-            if (newX > _mapXMax)
+            if (newX > XMax)
             {
                 error = "About to go out of right-side of the map";
                 return false;
             }
-            if (newX < _mapXMin)
+            if (newX < XMin)
             {
                 error = "About to go out of left-side of the map";
                 return false;
@@ -145,12 +145,12 @@ public partial class RobotCleaner
         if (change.dy is 1 or -1)
         {
             var newY = CurrentPosition.Y + change.dy;
-            if (newY > _mapYMax)
+            if (newY > YMax)
             {
                 error = "About to go out of top of the map";
                 return false;
             }
-            if (newY < _mapYMin)
+            if (newY < YMin)
             {
                 error = "About to go out of bottom of the map";
                 return false;
