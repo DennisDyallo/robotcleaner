@@ -23,7 +23,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\RobotCleaner\RobotCleaner.csproj" />
+      <ProjectReference Include="..\RobotCleaner.Api\RobotCleaner.Api.csproj" />
     </ItemGroup>
 
 </Project>

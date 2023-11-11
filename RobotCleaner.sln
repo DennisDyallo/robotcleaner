@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner", "RobotCleane
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner.Tests", "RobotCleaner.Tests\RobotCleaner.Tests.csproj", "{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner.Api", "RobotCleaner.Api\RobotCleaner.Api.csproj", "{B5C45623-325C-4FD1-8B5A-4C9AFF668AE9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner.Api.Tests", "RobotCleaner.Api.Tests\RobotCleaner.Api.Tests.csproj", "{6EB08477-F6A2-4C4D-996C-AB9D536E3507}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B5C45623-325C-4FD1-8B5A-4C9AFF668AE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B5C45623-325C-4FD1-8B5A-4C9AFF668AE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B5C45623-325C-4FD1-8B5A-4C9AFF668AE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B5C45623-325C-4FD1-8B5A-4C9AFF668AE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EB08477-F6A2-4C4D-996C-AB9D536E3507}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EB08477-F6A2-4C4D-996C-AB9D536E3507}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EB08477-F6A2-4C4D-996C-AB9D536E3507}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EB08477-F6A2-4C4D-996C-AB9D536E3507}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -2,26 +2,47 @@ using Xunit.Abstractions;
 
 namespace RobotCleaner.Tests;
 
-public class RobotCleanerTests
-{
-    private readonly ITestOutputHelper _testOutputHelper;
-    private readonly RobotCleaner _robotCleaner;
-    const string ExampleInput = "M:-10,10,-10,10;S:-5,5;[W5,E5,N4,E3,S2,W1]";
 
-    public RobotCleanerTests(ITestOutputHelper testOutputHelper)
+public class Arrange<T>
+{
+    protected readonly ITestOutputHelper _testOutputHelper;
+    protected readonly RobotCleaner _robotCleaner;
+    protected const string ExampleInput = "M:-10,10,-10,10;S:-5,5;[W5,E5,N4,E3,S2,W1]";
+    public Arrange(ITestOutputHelper testOutputHelper)
     {
         _testOutputHelper = testOutputHelper;
         _robotCleaner = RobotCleaner.Create(ExampleInput);
-    
     }
+}
+
+public class Given_RobotCleaner : Arrange<RobotCleaner>
+{
+    public Given_RobotCleaner(ITestOutputHelper testOutputHelper):base(testOutputHelper) 
+    {
+  
+    }
+
+    [Fact]
+    public void When_Create_With_ValidRequest_ReturnsRobotCleaner()
+    {
+        var request = new Request(new Coordinate(0,0), new []
+        {
+            new Command("East", 1),
+            new Command("East", 1)
+        });
+        var robotcleaner = RobotCleaner.Create(request);
+        robotcleaner.LetsGo();
+        Assert.Equal(3,  robotcleaner.VisitedPositions.Count());
+    }
+    
     [Fact]
     public void MapIsNotEmptyWhenCreated() => Assert.False(string.IsNullOrWhiteSpace(_robotCleaner.Map));
 
     [Fact]
-    public void HasMoveInstructions() => Assert.False(string.IsNullOrWhiteSpace(_robotCleaner.MoveInstructions));
+    public void HasMoveInstructions() => Assert.False(string.IsNullOrWhiteSpace(_robotCleaner.MoveInstructionsStr));
 
     [Fact]
-    public void HasMoveInstructionsWhenCreated() => Assert.False(string.IsNullOrWhiteSpace(_robotCleaner.MoveInstructions));
+    public void HasMoveInstructionsWhenCreated() => Assert.False(string.IsNullOrWhiteSpace(_robotCleaner.MoveInstructionsStr));
 
     [Fact]
     public void HasCurrentPositionWhenCreated() => Assert.NotNull(_robotCleaner.CurrentPosition);

@@ -20,19 +20,19 @@ namespace RobotCleaner
             // var userInput = "M:-10,10,-10,10;S:-5,5;[W5,E5,N4,E3,S2,W1]";
 
             var userInput = "M:-1,1,-1,1;S:0,0;[E1]";
-            var robotCleaner = RobotCleaner.Create(userInput, null);
+            var robotCleaner = RobotCleaner.Create(userInput);
 
             robotCleaner.LetsGo();
             var logger = LoggerFactory.CreateLogger("RobotCleaner");
+            
+            logger.LogInformation($"Old Map: {robotCleaner.Map} ");
+            logger.LogInformation($"New Map: {robotCleaner.XMin+Math.Abs(robotCleaner.XMin)}, {robotCleaner.XMax+Math.Abs(robotCleaner.XMax) }, {robotCleaner.YMin+Math.Abs(robotCleaner.YMin)}, {robotCleaner.YMax+Math.Abs(robotCleaner.YMax) }");
 
             Console.Clear();
 
             origRow = Console.CursorTop;
             origCol = Console.CursorLeft;
-
-
-            int xRange = 0,
-                yRange = 0;
+            
 
             for (var y = robotCleaner.YMin; y <= robotCleaner.YMax; y++)
             {
@@ -41,27 +41,19 @@ namespace RobotCleaner
                     Console.Write("#");
                 }
 
-                yRange++;
                 Console.WriteLine();
             }
+            
+            var xPosStart = -1;
+            var yPosStart = -1;
 
-            var xPosStart = 0;
-            var yPosStart = 0;
-
-            var newMid = yRange / 2;
-            var xPosNew = xPosStart + newMid;
-            var yPosNew = yPosStart + newMid;
-
-            WriteAt("@", xPosNew, yPosNew);
+            var xPosNew = xPosStart + Math.Abs(robotCleaner.XMin);
+            var yPosNew = yPosStart + Math.Abs(robotCleaner.YMin);
+            // WriteAt("@", xPosNew, yPosNew);
+            
             Console.ReadLine();
         }
-
-        private static int AddAbsolute(int x, int y)
-        {
-            return Math.Abs(x) + Math.Abs(y);
-        }
-
-
+        
         protected static void WriteAt(string s, int x, int y)
         {
             try
