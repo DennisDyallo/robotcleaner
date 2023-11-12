@@ -2,23 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RobotCleaner.Api.Controllers;
-using RobotCleaner.Api.Data;
-using RobotCleaner.Api.Usecases.SaveCommands;
+using RobotCleaner.Api.Features.Clean;
 
 #nullable disable
 
 namespace RobotCleaner.Api.Migrations
 {
-    [DbContext(typeof(SaveCommandsContext))]
-    [Migration("20231111193932_change-name")]
-    partial class changename
+    [DbContext(typeof(CleanContext))]
+    partial class CleanContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,7 +22,7 @@ namespace RobotCleaner.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("RobotCleaner.Api.Controllers.Execution", b =>
+            modelBuilder.Entity("RobotCleaner.Api.Features.Clean.Execution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -41,7 +36,11 @@ namespace RobotCleaner.Api.Migrations
                     b.Property<TimeSpan>("Duration")
                         .HasColumnType("interval");
 
-                    b.Property<DateTimeOffset>("TimeStamp")
+                    b.Property<int>("Result")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");

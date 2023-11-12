@@ -7,22 +7,20 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace RobotCleaner.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class changename : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "Results");
-
             migrationBuilder.CreateTable(
                 name: "Executions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    TimeStamp = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    TimeStamp = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     Commands = table.Column<int>(type: "integer", nullable: false),
+                    Result = table.Column<int>(type: "integer", nullable: false),
                     Duration = table.Column<TimeSpan>(type: "interval", nullable: false)
                 },
                 constraints: table =>
@@ -36,21 +34,6 @@ namespace RobotCleaner.Api.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Executions");
-
-            migrationBuilder.CreateTable(
-                name: "Results",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Commands = table.Column<int>(type: "integer", nullable: false),
-                    Duration = table.Column<TimeSpan>(type: "interval", nullable: false),
-                    TimeStamp = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Results", x => x.ID);
-                });
         }
     }
 }

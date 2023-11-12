@@ -1,18 +1,20 @@
 using CtorMock.NSubstitute;
 using NSubstitute;
-using RobotCleaner.Api.Usecases.SaveCommands;
+using RobotCleaner.Api.Features.Clean;
+
+// ReSharper disable All
 
 namespace RobotCleaner.Api.Tests.Usecases.Given_SaveCommands;
 
-public class Arrange : MockBase<SaveCommands>
+public class Arrange : MockBase<Clean>
 {
     protected Arrange()
     {
         Mocker.MockOf<ISaveCommandsRepository>()!.SaveAsync(Arg.Any<Execution>()).ReturnsForAnyArgs(SaveAsyncResult);
     }
     protected virtual Execution SaveAsyncResult => null!;
-    protected virtual Request Request => new();
-    protected virtual ISaveCommands.SaveCommandsResult SaveCommandsResult => Subject.ExecuteAsync(Request).Result;
+    protected virtual IClean.Request Request => new();
+    protected virtual IClean.Result Result => Subject.ExecuteAsync(Request).Result;
 }
 
 public class When_ExecuteAsync : Arrange
@@ -23,27 +25,26 @@ public class When_ExecuteAsync : Arrange
         Result = 2
     };
 
-    protected override Request Request => new()
+    protected override IClean.Request Request => new()
         {
             Start = new Coordinate(0, 0),
             Commands = new[] { new Command("West", 1) }
         };
 
-
     [Fact]
     public void With_ValidRequest_ReturnsExpectedResult()
     {
-        Assert.Equal(1, SaveCommandsResult.Commands);
-        Assert.Equal(2, SaveCommandsResult.Result);
+        Assert.Equal(1, Result.Commands);
+        Assert.Equal(2, Result.RoomsCleaned);
     }
 
     [Fact]
     public async Task With_TooLowPosition_ThrowsException()
     {
-        var tooLowPosition = new Request
+        var tooLowPosition = new IClean.Request
         {
             Start = new Coordinate(0, int.MaxValue),
-            Commands = Enumerable.Range(0, 1).Select(p => new Command("East", 1)).ToArray()
+            Commands = Enumerable.Range(0, 1).Select(_ => new Command("East", 1)).ToArray()
         };
 
         await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await Subject.ExecuteAsync(tooLowPosition));
@@ -52,10 +53,10 @@ public class When_ExecuteAsync : Arrange
     [Fact]
     public async Task With_TooHighPosition_ThrowsException()
     {
-        var tooHighPosition = new Request
+        var tooHighPosition = new IClean.Request
         {
             Start = new Coordinate(0, int.MaxValue),
-            Commands = Enumerable.Range(0, 1).Select(p => new Command("East", 1)).ToArray()
+            Commands = Enumerable.Range(0, 1).Select(_ => new Command("East", 1)).ToArray()
         };
 
         await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await Subject.ExecuteAsync(tooHighPosition));
@@ -64,10 +65,10 @@ public class When_ExecuteAsync : Arrange
     [Fact]
     public async Task With_TooManyCommands_ThrowsException()
     {
-        var tooManyCommands = new Request
+        var tooManyCommands = new IClean.Request
         {
             Start = new Coordinate(0, 0),
-            Commands = Enumerable.Range(0, 10001).Select(p => new Command("East", 1)).ToArray()
+            Commands = Enumerable.Range(0, 10001).Select(_ => new Command("East", 1)).ToArray()
         };
 
         await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await Subject.ExecuteAsync(tooManyCommands));

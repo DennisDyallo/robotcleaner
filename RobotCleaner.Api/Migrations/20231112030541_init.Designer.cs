@@ -5,16 +5,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
-using RobotCleaner.Api.Data;
-using RobotCleaner.Api.Usecases.SaveCommands;
+using RobotCleaner.Api.Features.Clean;
 
 #nullable disable
 
 namespace RobotCleaner.Api.Migrations
 {
-    [DbContext(typeof(SaveCommandsContext))]
-    [Migration("20231111200904_add-result")]
-    partial class addresult
+    [DbContext(typeof(CleanContext))]
+    [Migration("20231112030541_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -26,7 +25,7 @@ namespace RobotCleaner.Api.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("RobotCleaner.Api.Data.Execution", b =>
+            modelBuilder.Entity("RobotCleaner.Api.Features.Clean.Execution", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -44,6 +43,7 @@ namespace RobotCleaner.Api.Migrations
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("TimeStamp")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");

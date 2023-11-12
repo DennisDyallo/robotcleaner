@@ -1,15 +1,18 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace RobotCleaner.Api.Usecases.SaveCommands;
+namespace RobotCleaner.Api.Features.Clean;
 
-public class SaveCommandsContext : DbContext
+public class CleanContext : DbContext
 {
+    private readonly ILogger<CleanContext> _logger;
     public DbSet<Execution> Executions { get; set; } = null!;
 
-    public SaveCommandsContext(DbContextOptions options):base(options)
+    public CleanContext(DbContextOptions options, ILogger<CleanContext> logger):base(options)
     {
+        _logger = logger;
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -17,7 +20,7 @@ public class SaveCommandsContext : DbContext
         var dateTimeOffsetConverter = new ValueConverter<DateTimeOffset, DateTime>(
             dateTimeOffset => dateTimeOffset.UtcDateTime, 
             dateTime => new DateTimeOffset(dateTime));
-        
+
         modelBuilder.Entity<Execution>()
             .Property(e => e.TimeStamp)
             .HasConversion(dateTimeOffsetConverter);
@@ -41,9 +44,10 @@ public class SaveCommandsContext : DbContext
 
 public record Execution
 {
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; init; }
-    public DateTimeOffset TimeStamp { get; set; } = DateTimeOffset.Now;
-    public int Commands { get; set; }
+    public DateTimeOffset TimeStamp { get; set; } = DateTimeOffset.UtcNow;
+    public int Commands { get; set; } 
     public int Result { get; set; }
     public TimeSpan Duration { get; set; }
 }
