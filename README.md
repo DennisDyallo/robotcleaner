@@ -1,3 +1,5 @@
+![Test](https://github.com/dennisdyallo/robotcleaner/actions/workflows/test.yml/badge.svg)
+
 # robot cleaner
 **Tibber Platform environment**
 The Tibber platform consists of a swarm of microservices running as
