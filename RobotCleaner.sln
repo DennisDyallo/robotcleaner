@@ -1,8 +1,20 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner", "RobotCleaner\RobotCleaner.csproj", "{A153CDED-DE56-41A0-A3C9-6BD377AA0264}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5E925AF8-4932-426C-A68D-0D08D2086DF8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner.Tests", "RobotCleaner.Tests\RobotCleaner.Tests.csproj", "{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2AB63B55-CF48-412D-9FF9-41D147731D82}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+		.github\workflows\test.yml = .github\workflows\test.yml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner", "src\RobotCleaner\RobotCleaner.csproj", "{C83DCDA8-7416-4F59-851A-5775AFA0F82D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner.Tests", "src\Tests\RobotCleaner.Tests\RobotCleaner.Tests.csproj", "{DCEFF09E-7706-4A08-BC63-6A41A93ACD62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner.Api.Tests", "src\Tests\RobotCleaner.Api.Tests\RobotCleaner.Api.Tests.csproj", "{C67DE2D8-6FE0-46E6-8522-CEFAEF7651FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RobotCleaner.Api", "src\RobotCleaner.Api\RobotCleaner.Api.csproj", "{63DDDB7D-CE53-4DCC-BC90-8C9A5A5C119A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -10,13 +22,25 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A153CDED-DE56-41A0-A3C9-6BD377AA0264}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A153CDED-DE56-41A0-A3C9-6BD377AA0264}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A153CDED-DE56-41A0-A3C9-6BD377AA0264}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A153CDED-DE56-41A0-A3C9-6BD377AA0264}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F1BE14D0-2A4A-4D8B-A789-239EA2CC6893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C83DCDA8-7416-4F59-851A-5775AFA0F82D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C83DCDA8-7416-4F59-851A-5775AFA0F82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C83DCDA8-7416-4F59-851A-5775AFA0F82D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C83DCDA8-7416-4F59-851A-5775AFA0F82D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCEFF09E-7706-4A08-BC63-6A41A93ACD62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCEFF09E-7706-4A08-BC63-6A41A93ACD62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCEFF09E-7706-4A08-BC63-6A41A93ACD62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCEFF09E-7706-4A08-BC63-6A41A93ACD62}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67DE2D8-6FE0-46E6-8522-CEFAEF7651FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67DE2D8-6FE0-46E6-8522-CEFAEF7651FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67DE2D8-6FE0-46E6-8522-CEFAEF7651FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67DE2D8-6FE0-46E6-8522-CEFAEF7651FB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63DDDB7D-CE53-4DCC-BC90-8C9A5A5C119A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63DDDB7D-CE53-4DCC-BC90-8C9A5A5C119A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63DDDB7D-CE53-4DCC-BC90-8C9A5A5C119A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63DDDB7D-CE53-4DCC-BC90-8C9A5A5C119A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DCEFF09E-7706-4A08-BC63-6A41A93ACD62} = {5E925AF8-4932-426C-A68D-0D08D2086DF8}
+		{C67DE2D8-6FE0-46E6-8522-CEFAEF7651FB} = {5E925AF8-4932-426C-A68D-0D08D2086DF8}
 	EndGlobalSection
 EndGlobal

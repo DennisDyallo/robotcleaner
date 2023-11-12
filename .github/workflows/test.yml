@@ -5,10 +5,10 @@ permissions:
 on:
   push:
     branches:
-      - main
+      - "*"
   pull_request:
     branches:
-      - main
+      - "*"
 
 jobs:
   build-and-test:
@@ -36,4 +36,4 @@ jobs:
         if: always()
         with:
           files: |
-            RobotCleaner.Tests/TestResults/test_results.trx
+            **/test_results.trx
