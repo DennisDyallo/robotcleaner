@@ -36,4 +36,4 @@ jobs:
         if: always()
         with:
           files: |
-            RobotCleaner.Tests/TestResults/test_results.trx
+            **/test_results.trx
