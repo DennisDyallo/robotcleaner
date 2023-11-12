@@ -1,81 +1,43 @@
-# robotcleaner
+# robot cleaner
+**Tibber Platform environment**
+The Tibber platform consists of a swarm of microservices running as
+Docker containers. The primary development platforms are .NET,
+Node JS and Python in conjunction with other technologies. Our
+main ways of data storage are through PostgreSQL as
+relational/document storage and Amazon S3 as blob storage.
 
-# Background
+## Technical Case
+Create a new microservice that could fit into the Tibber Platform environment as
+described above. The created service will simulate a robot moving in an office space
+and will be cleaning the places this robot visits. The path of the robot's movement is
+described by the starting coordinates and move commands. After the cleaning has
+been done, the robot reports the number of unique places cleaned. The service will
+store the results into the database and return the created record in JSON format. The
+service listens to HTTP protocol on port 5000.
 
-When you have a lot of people working in an office it can get dirty quite quickly if you’re not careful. However, cleaning staff are expensive. To save money on cleaning staff the best solution was deemed to be the creation of an automatic cleaning robot that cleans the office at night.
+## Notes
+● You can assume, for the sake of simplicity, that the office can be viewed as a
+grid where the robot moves only on the vertices.
+● The robot cleans at every vertex it touches, not just where it stops.
+● All input should be considered well formed and syntactically correct. There is no
+need, therefore, to implement elaborate input validation.
+● The robot will never be sent outside the bounds of the office.
+● Ensure that database connection is configurable using environment variable.
+● Think about structure, readability, maintainability, performance, re-usability and
+test-ability of the code. Like the solution is going to be deployed into the
+production environment. You should be proud of what you deliver.
+● Use only open source dependencies if needed.
+● Include Dockerfile and docker-compose configuration files in the solution.
 
-# Assignment
-
-Your assignment is to build a prototype of this robot’s scheduling software. Since it’s only a prototype, the scope and required functionality is limited, and allows for some flexibility and interpretation in its implementation. However just because it’s simple doesn’t mean it’s not important, and it’s expected to be built to be both easy to maintain and easy to expand upon in the future.
-
-# Requirements
-
-The robot should use a Cartesian coordinate system to understand its position.
-
-At start, the robot should take in its map, its starting position, and its intended route according to the following format standard:
-
-M:MinX,MaxX,MinY,MaxY;S:StartingX,StartingY;[Direction+Length]
-
-Example: M:-10,10,-10,10;S:-5,5;[W5,E5,N4,E3,S2,W1]
-
-The input has 3 sections, separated by semicolons - the order is not important.
-
-M stands for Map, and takes in 4 values representing the limits of the Cartesian coordinate system.
-
-S stands for Start, and takes in a coordinate point, which is where the cleaner will start form.
-
-Between [ and ] will be an array of values representing Direction and Length, separated by commas.
-
-Directions are the representations of the 4 cardinal points: N, E, S, and W
-
-Length is how far the robot should travel in that direction
-
-The format is Direction+Length, like “N10”, “E2”, “S4”
-
-Once the robot starts, it shouldn’t stop until it has completed its planned route, unless it goes outside of its Map. If this happens, an error should be displayed showing its current position and why it can’t execute its path, along with all positions it has traveled so far.
-
-At the conclusion of the robot’s route (if successful), it should output all the unique coordinates it has visited (and hopefully cleaned).
-
-Bad input and errors should be handled with grace, and should provide helpful feedback.
-
-There is no need for an advanced UI; a simple command line is sufficient.
-
-
-
-# Examples:
-
-Here are some examples of input/output:
-
-Using Input: M:-10,10,-10,10;S:-5,5;[W5,E5,N4,E3,S2,W1]
-
-All Positions Cleaned:
-
--5,5;-6,5;-7,5;-8,5;-9,5;-10,5;-9,5;-8,5;-7,5;-6,5;-5,5;-5,6;-5,7;-5,8;-5,9;-4,9;-3,9;-2,9;-2,8;-2,7;-3,7
-
-Unique Positions Cleaned:
-
--5,5;-6,5;-7,5;-8,5;-9,5;-10,5;-5,6;-5,7;-5,8;-5,9;-4,9;-3,9;-2,9;-2,8;-2,7;-3,7
-
------------------------
-
-Using Input: [W1,N1,E1,E1,S1,S1,W1,W1,N1,E1];S:0,0;M:-1,1,-1,1
-
-All Positions Cleaned:
-
-0,0;-1,0;-1,1;0,1;1,1;1,0;1,-1;0,-1;-1,-1;-1,0;0,0
-
-Unique Positions Cleaned:
-
-0,0;-1,0;-1,1;0,1;1,1;1,0;1,-1;0,-1;-1,-1
-
------------------------
-
-Using Input: S:0,0;[N1,N1,N1,N1,N1,S1,S1,S1,S1,S1];M:0,0,0,5
-
-All Positions Cleaned:
-
-0,0;0,1;0,2;0,3;0,4;0,5;0,4;0,3;0,2;0,1;0,0
-
-Unique Positions Cleaned:
-
-0,0;0,1;0,2;0,3;0,4;0,5
+## What will we be assessing?
+Doing a technical case can be tricky and time intensive, we know! And you better
+believe it, we are grateful for the time, effort and attention to detail you put into this! To
+make it a bit clearer for you, we want to share some of the things that we will assess
+when reviewing your assignment, please see below.
+● WE LOVE unit testing! ♥️
+● Troubleshooting is time consuming but please ensure your solution is runnable
+on a clean machine using just the code and documentation you have provided
+(ie. sometimes it can run well on a mac but not on other machines) 🏃
+● We’re not huge fans of over engineered solutions. Crisp, clear and efficient is our
+way to go, don’t overcomplicate something which doesn’t need to be. Clean code
+is happy code.
