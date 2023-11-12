@@ -5,11 +5,12 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["RobotCleaner.Api/RobotCleaner.Api.csproj", "RobotCleaner.Api/"]
-RUN dotnet restore "RobotCleaner.Api/RobotCleaner.Api.csproj"
+COPY ["src/RobotCleaner.Api/RobotCleaner.Api.csproj", "src/RobotCleaner.Api/"]
+COPY ["src/RobotCleaner/RobotCleaner.csproj", "src/RobotCleaner/"]
+RUN dotnet restore "src/RobotCleaner.Api/RobotCleaner.Api.csproj"
 COPY . .
-WORKDIR "/src/RobotCleaner.Api"
-RUN dotnet build "RobotCleaner.Api.csproj" -c Release -o /app/build 
+WORKDIR "/src/src/RobotCleaner.Api"
+RUN dotnet build "RobotCleaner.Api.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "RobotCleaner.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false

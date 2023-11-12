@@ -8,3 +8,5 @@ riderModule.iml
 /.vs/RobotCleaner
 /RobotCleaner.Tests/TestResults
 /.vs/ProjectEvaluation
+
+**/appsettings.Development.json

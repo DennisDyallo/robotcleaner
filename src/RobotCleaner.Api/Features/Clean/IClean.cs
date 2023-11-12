@@ -16,6 +16,5 @@ public interface IClean
     {
         public Coordinate Start { get; init; }
         public Command[] Commands { get; init; }
-        public Bounds? Bounds { get; init; }
     };
 }
