@@ -1,11 +1,11 @@
 namespace RobotCleaner.Api.Features.Clean;
 
-public interface ISaveCommandsRepository
+public interface ICleanRepository
 {
     public Task<Execution> SaveAsync(Execution result);
 }
 
-public class CleanRepository : ISaveCommandsRepository
+public class CleanRepository : ICleanRepository
 {
     private readonly CleanContext _cleanContext;
 

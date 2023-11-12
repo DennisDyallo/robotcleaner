@@ -10,7 +10,7 @@ public class Arrange : MockBase<Clean>
 {
     protected Arrange()
     {
-        Mocker.MockOf<ISaveCommandsRepository>()!.SaveAsync(Arg.Any<Execution>()).ReturnsForAnyArgs(SaveAsyncResult);
+        Mocker.MockOf<ICleanRepository>()!.SaveAsync(Arg.Any<Execution>()).ReturnsForAnyArgs(SaveAsyncResult);
     }
     protected virtual Execution SaveAsyncResult => null!;
     protected virtual IClean.Request Request => new();

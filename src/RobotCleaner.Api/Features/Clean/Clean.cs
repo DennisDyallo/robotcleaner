@@ -4,12 +4,12 @@ namespace RobotCleaner.Api.Features.Clean;
 
 public class Clean : IClean
 {
-    private readonly ISaveCommandsRepository _saveCommandsRepository;
+    private readonly ICleanRepository _cleanRepository;
     private readonly RobotCleaner _robotCleaner;
 
-    public Clean(ISaveCommandsRepository saveCommandsRepository, RobotCleaner robotCleaner)
+    public Clean(ICleanRepository cleanRepository, RobotCleaner robotCleaner)
     {
-        _saveCommandsRepository = saveCommandsRepository;
+        _cleanRepository = cleanRepository;
         _robotCleaner = robotCleaner;
     }
 
@@ -19,7 +19,7 @@ public class Clean : IClean
         
         var cleanResult = _robotCleaner.StartClean(request.Start, request.Commands);
         var dto = ToDbItem(cleanResult);
-        var saveResult = await _saveCommandsRepository.SaveAsync(dto);
+        var saveResult = await _cleanRepository.SaveAsync(dto);
         return ToResult(saveResult);
     }
     

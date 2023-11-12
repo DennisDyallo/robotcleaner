@@ -10,7 +10,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<RobotCleaner.RobotCleaner>();
 builder.Services.AddScoped<IClean, Clean>();
-builder.Services.AddScoped<ISaveCommandsRepository, CleanRepository>();
+builder.Services.AddScoped<ICleanRepository, CleanRepository>();
 builder.Configuration.AddEnvironmentVariables();
 builder.Services.AddDbContext<CleanContext>(
     ee => { ee.UseNpgsql(builder.Configuration.GetConnectionString("RobotCleaner")); });
